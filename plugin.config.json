@@ -1,0 +1,28 @@
+{
+  "name": "plugin-template-basic",
+  "version": "1.0.0",
+  "description": "Template plugin for River platform",
+  "functions": [
+    {
+      "name": "exampleFunction",
+      "description": "Converts input to uppercase",
+      "pricePerCall": 0.05,
+      "parameters": [
+        {
+          "name": "input",
+          "type": "string",
+          "description": "The input string to process",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "properties": {
+          "original": { "type": "string" },
+          "processed": { "type": "string" },
+          "timestamp": { "type": "string" }
+        }
+      }
+    }
+  ]
+}
