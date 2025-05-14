@@ -51,12 +51,3 @@ The plugin configuration is defined in `plugin.config.json`. This includes:
 - Tests are in `src/__tests__/`
 - Local development server uses native Node.js http module
 
-## Building for Production
-
-To build for production deployment:
-
-```bash
-npm run build
-```
-
-This will create a distribution in the `dist/` directory ready for AWS Lambda deployment. # river-plugin-template

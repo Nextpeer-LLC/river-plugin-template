@@ -4,7 +4,6 @@
   "description": "Template plugin for River platform",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
     "dev": "ts-node src/dev-server.ts",
     "test": "vitest run",
     "test:watch": "vitest"
