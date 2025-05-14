@@ -1,8 +1,10 @@
 import { z } from 'zod';
 
-export const ExampleFunctionInput = z.object({
-  input: z.string(),
-});
+export const ExampleFunctionInput = z
+  .object({
+    text: z.string().describe('The text to process'),
+  })
+  .describe('The input for the example function');
 
 export type ExampleFunctionInput = z.infer<typeof ExampleFunctionInput>;
 

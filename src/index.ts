@@ -1,10 +1,10 @@
 import { exampleFunction } from './functions/exampleFunction';
 import { ExampleFunctionInput } from './types';
 
-type LambdaEvent = {
-  path: string;
-  httpMethod: string;
-  body: string;
+// Support both API Gateway and direct Lambda URL invocations
+type Event = {
+  functionName: string;
+  input: any;
 };
 
 async function invokeFunction(functionName: string, input: any): Promise<any> {
@@ -16,27 +16,25 @@ async function invokeFunction(functionName: string, input: any): Promise<any> {
   }
 }
 
-export const handler = async (event: LambdaEvent): Promise<any> => {
+export const handler = async (event: Event): Promise<{ statusCode: number; data: any }> => {
   try {
-    const { path, httpMethod, body } = event;
-
-    if (httpMethod !== 'POST' || !path.startsWith('/invoke/')) {
-      return { statusCode: 404, body: JSON.stringify({ error: 'Not found' }) };
+    if (!event.functionName || !event.input) {
+      return {
+        statusCode: 400,
+        data: { error: 'Invalid request', event },
+      };
     }
-
-    const functionName = path.split('/invoke/')[1];
-    const parsed = body ? JSON.parse(body) : {};
-    const result = await invokeFunction(functionName, parsed);
+    const data = await invokeFunction(event.functionName, event.input);
 
     return {
       statusCode: 200,
-      body: JSON.stringify(result),
+      data,
     };
   } catch (error) {
     console.error('Error processing request:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' }),
+      data: { error: 'Internal server error' },
     };
   }
 };

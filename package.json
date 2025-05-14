@@ -1,5 +1,5 @@
 {
-  "name": "plugin-template-basic",
+  "name": "river-plugin-template",
   "version": "1.0.0",
   "description": "Template plugin for River platform",
   "main": "dist/index.js",
